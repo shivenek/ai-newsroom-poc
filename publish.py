@@ -23,7 +23,9 @@ def load_articles():
         with open(jf) as f:
             meta = json.load(f)
         aid = meta["id"]
-        md_path = f"{DRAFTS}/{aid}.md"
+        # Drafts are named {id}-{slug}.md — find by prefix
+        md_matches = glob.glob(f"{DRAFTS}/{aid}*.md")
+        md_path = md_matches[0] if md_matches else f"{DRAFTS}/{aid}.md"
         body_html = ""
         teaser = ""
         if os.path.exists(md_path):
