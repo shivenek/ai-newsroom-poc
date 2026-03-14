@@ -75,6 +75,12 @@ def md_to_html(md):
 
 def find_image(meta):
     """Versuche ein passendes Bild aus assets/ zu finden"""
+    aid = meta.get("id", "")
+    # 1. Exakter Match: header-{id}.png
+    exact = f"{ASSETS_SRC}/header-{aid}.png"
+    if os.path.exists(exact):
+        return f"header-{aid}.png"
+    # 2. Keyword-Fallback
     images = glob.glob(f"{ASSETS_SRC}/*.png") + glob.glob(f"{ASSETS_SRC}/*.jpg")
     title_lower = meta.get("title", "").lower()
     keywords = [k.lower() for k in meta.get("keywords", [])]
@@ -83,11 +89,9 @@ def find_image(meta):
         for kw in keywords:
             if kw.replace(" ", "-") in fname or kw.replace(" ", "_") in fname:
                 return os.path.basename(img)
-        # Teilwort-Match
         for word in title_lower.split():
             if len(word) > 4 and word in fname:
                 return os.path.basename(img)
-    # Fallback: erstes Bild
     if images:
         return os.path.basename(images[0])
     return None
