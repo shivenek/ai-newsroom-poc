@@ -211,6 +211,12 @@ def git_commit_and_tag():
     # Tag setzen (falls schon existiert: überschreiben)
     subprocess.run(["git", "tag", "-f", today], check=True)
     print(f"✅ Committed und getaggt: {today}")
+    # Push to GitHub Pages
+    push = subprocess.run(["git", "push", "origin", "main", "--tags", "--force"], capture_output=True, text=True)
+    if push.returncode == 0:
+        print("🚀 Gepusht auf GitHub Pages")
+    else:
+        print(f"⚠️  Push fehlgeschlagen: {push.stderr.strip()}")
 
 def main():
     print("📰 AI Newsroom Publisher")
