@@ -102,13 +102,13 @@ def build_article_html(article):
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{article["title"]} – Business Punk AI Newsroom</title>
+    <title>{article["title"]} – BP AI Newsroom POC</title>
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
     <header>
         <nav>
-            <a href="../index.html" class="logo">Business Punk <span class="ai-badge">AI Newsroom</span></a>
+            <a href="../index.html" class="logo">BP <span class="ai-badge">AI Newsroom POC</span></a>
             <span class="ressort-tag">{article["ressort"].replace("-", " & ").title()}</span>
         </nav>
     </header>
@@ -129,7 +129,7 @@ def build_article_html(article):
     </article>
     <footer>
         <a href="../index.html">← Zurück zur Übersicht</a>
-        <p>AI Newsroom POC – Automatisch generiert</p>
+        <p>BP AI Newsroom POC – Automatisch generiert</p>
     </footer>
 </body>
 </html>"""
@@ -171,13 +171,13 @@ def build_index_html(articles):
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tech & Trends – Business Punk AI Newsroom</title>
+    <title>Tech & Trends – BP AI Newsroom POC</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
         <nav>
-            <span class="logo">Business Punk <span class="ai-badge">AI Newsroom</span></span>
+            <span class="logo">BP <span class="ai-badge">AI Newsroom POC</span></span>
             <span class="edition">Ausgabe {today}</span>
         </nav>
     </header>
@@ -189,8 +189,8 @@ def build_index_html(articles):
         </section>
     </main>
     <footer>
-        <p>AI Newsroom POC – Automatisch generiert am {today}</p>
-        <p>Powered by OpenClaw + kimi-k2.5</p>
+        <p>BP AI Newsroom POC – Automatisch generiert am {today}</p>
+        <p>Powered by Independent Newsroom Harness + Opensource kimi-k2.5 and GLM-5</p>
     </footer>
 </body>
 </html>"""
