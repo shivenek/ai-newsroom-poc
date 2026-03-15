@@ -201,6 +201,13 @@ def build_index_html(articles):
 </body>
 </html>"""
 
+def clean_previous():
+    """Remove old articles and assets before rebuilding"""
+    for f in glob.glob(f"{PUB_ARTICLES}/*.html"):
+        os.remove(f)
+    for f in glob.glob(f"{PUB_ASSETS}/*"):
+        os.remove(f)
+
 def copy_assets():
     for f in glob.glob(f"{ASSETS_SRC}/*"):
         shutil.copy2(f, PUB_ASSETS)
@@ -227,6 +234,9 @@ def git_commit_and_tag():
 def main():
     print("📰 AI Newsroom Publisher")
     print("========================")
+
+    clean_previous()
+    print("🧹 Alte Artikel und Assets entfernt")
 
     articles = load_articles()
     print(f"📄 {len(articles)} Artikel geladen")
