@@ -17,9 +17,10 @@ PUB_ARTICLES = f"{PUB}/articles"
 PUB_ASSETS = f"{PUB}/assets"
 
 def load_articles():
-    """Lade alle Artikel aus review/ + drafts/"""
+    """Lade alle Artikel aus review/ + drafts/ (nur heutiges Datum)"""
+    today_prefix = date.today().isoformat()
     articles = []
-    for jf in sorted(glob.glob(f"{REVIEW}/*.json")):
+    for jf in sorted(glob.glob(f"{REVIEW}/{today_prefix}*.json")):
         with open(jf) as f:
             meta = json.load(f)
         aid = meta["id"]
