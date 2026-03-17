@@ -195,6 +195,35 @@ article h1 {
     line-height: 1.75;
     margin-bottom: 1rem;
 }
+/* FAQ Section */
+.faq {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 2px solid var(--black);
+}
+.faq > h2 {
+    font-size: 1.6rem;
+    font-weight: 900;
+    margin-bottom: 1.5rem;
+}
+.faq h3 {
+    font-family: var(--font-sans);
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin-top: 1.5rem;
+    margin-bottom: 0.4rem;
+    line-height: 1.3;
+}
+.faq p {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--gray-600);
+    margin-bottom: 0;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--gray-300);
+}
+
 .keywords {
     margin-top: 2rem;
     padding-top: 1rem;

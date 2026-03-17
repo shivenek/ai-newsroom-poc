@@ -60,20 +60,43 @@ def md_to_html(md):
     """Einfacher Markdown→HTML Konverter"""
     lines = md.split("\n")
     html = []
+    in_faq = False
+    is_first_teaser = True
     for line in lines:
         line = line.strip()
         if not line:
             continue
-        if line.startswith("## "):
+        # FAQ section detection
+        if re.match(r"^#{2,3}\s*(FAQs?|Häufig gestellte Fragen)", line):
+            in_faq = True
+            html.append('<section class="faq">')
+            html.append('<h2>Häufig gestellte Fragen</h2>')
+            continue
+        if in_faq:
+            # Bold line = FAQ question
+            if line.startswith("**") and line.endswith("**"):
+                html.append(f'<h3>{line[2:-2]}</h3>')
+            else:
+                line = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", line)
+                line = re.sub(r"\*(.+?)\*", r"<em>\1</em>", line)
+                html.append(f"<p>{line}</p>")
+            continue
+        # Regular content
+        if line.startswith("### "):
+            html.append(f'<h3>{line[4:]}</h3>')
+        elif line.startswith("## "):
             html.append(f'<h2>{line[3:]}</h2>')
-        elif line.startswith("**") and line.endswith("**"):
+        elif line.startswith("**") and line.endswith("**") and is_first_teaser:
             html.append(f'<p class="teaser"><em>{line[2:-2]}</em></p>')
+            is_first_teaser = False
         else:
             # Bold
             line = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", line)
             # Italic
             line = re.sub(r"\*(.+?)\*", r"<em>\1</em>", line)
             html.append(f"<p>{line}</p>")
+    if in_faq:
+        html.append('</section>')
     return "\n".join(html)
 
 def find_image(meta):
