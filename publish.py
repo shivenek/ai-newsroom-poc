@@ -18,7 +18,7 @@ PUB_ASSETS = f"{PUB}/assets"
 
 def load_articles():
     """Lade alle Artikel aus review/ + drafts/ (nur heutiges Datum)"""
-    today_prefix = date.today().isoformat()
+    today_prefix = os.environ.get("PUBLISH_DATE", date.today().isoformat())
     articles = []
     for jf in sorted(glob.glob(f"{REVIEW}/{today_prefix}*.json")):
         with open(jf) as f:
